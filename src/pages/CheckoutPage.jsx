@@ -16,28 +16,53 @@ export function CheckoutPage() {
     newsletter: false
   });
 
+  const [carrito, setCarrito] = useState([
+    {
+      id: 1,
+      name: "Sweater de Alpaca Premium",
+      price: 299,
+      originalPrice: 399,
+      image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400&h=400&fit=crop",
+      rating: 4.8,
+      reviews: 124,
+      category: 'fashion',
+      sustainable: true,
+      badge: "Eco-friendly",
+      description: "Sweater tejido a mano con lana de alpaca 100% peruana. Suave, cálido y duradero.",
+      inStock: true,
+      stockCount: 15,
+      quantity: 1
+    }
+  ]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setForm({ 
-      ...form, 
-      [name]: type === 'checkbox' ? checked : value 
+    setForm({
+      ...form,
+      [name]: type === 'checkbox' ? checked : value
     });
   };
 
   const calculateTotal = () => {
-    const subtotal = 150.00;
+    const subtotal = carrito.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const envio = form.metodoEnvio === 'express' ? 15.00 : 0;
     return subtotal + envio;
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Finalizar compra</h1>
-          <p className="text-gray-600">Completa tu pedido de forma segura</p>
+    <div className="min-h-screen bg-gray-50">
+      {/* Navbar */}
+      <nav className="bg-white shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex justify-center">
+            <h1 className="text-4xl font-bold text-emerald-600">EcoMarket</h1>
+          </div>
         </div>
+      </nav>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Formulario de checkout */}
@@ -45,10 +70,10 @@ export function CheckoutPage() {
             {/* Información de contacto */}
             <div className="bg-white rounded-xl shadow-sm p-6">
               <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-emerald-600" /> 
+                <MapPin className="w-5 h-5 text-emerald-600" />
                 Información de contacto
               </h2>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center gap-2 mb-4">
                   <input
@@ -63,7 +88,7 @@ export function CheckoutPage() {
                     Recibir ofertas y novedades por email
                   </label>
                 </div>
-                
+
                 <input
                   name="correo"
                   type="email"
@@ -78,10 +103,10 @@ export function CheckoutPage() {
             {/* Dirección de envío */}
             <div className="bg-white rounded-xl shadow-sm p-6">
               <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                <Truck className="w-5 h-5 text-emerald-600" /> 
+                <Truck className="w-5 h-5 text-emerald-600" />
                 Dirección de envío
               </h2>
-              
+
               <div className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <input
@@ -99,7 +124,7 @@ export function CheckoutPage() {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
                   />
                 </div>
-                
+
                 <input
                   name="direccion"
                   placeholder="Dirección"
@@ -107,7 +132,7 @@ export function CheckoutPage() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
                 />
-                
+
                 <input
                   name="apartamento"
                   placeholder="Apartamento, suite, etc. (opcional)"
@@ -115,7 +140,7 @@ export function CheckoutPage() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
                 />
-                
+
                 <div className="grid sm:grid-cols-3 gap-4">
                   <input
                     name="ciudad"
@@ -147,7 +172,7 @@ export function CheckoutPage() {
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Método de envío
               </h2>
-              
+
               <div className="space-y-3">
                 <label className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-emerald-500 cursor-pointer transition-colors">
                   <div className="flex items-center gap-3">
@@ -166,7 +191,7 @@ export function CheckoutPage() {
                   </div>
                   <span className="font-semibold text-emerald-600">Gratis</span>
                 </label>
-                
+
                 <label className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-emerald-500 cursor-pointer transition-colors">
                   <div className="flex items-center gap-3">
                     <input
@@ -193,7 +218,7 @@ export function CheckoutPage() {
                 <CreditCard className="w-5 h-5 text-emerald-600" />
                 Método de pago
               </h2>
-              
+
               <div className="space-y-3">
                 <label className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-emerald-500 cursor-pointer transition-colors">
                   <div className="flex items-center gap-3">
@@ -212,7 +237,7 @@ export function CheckoutPage() {
                   </div>
                   <Lock className="w-5 h-5 text-gray-400" />
                 </label>
-                
+
                 <label className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-emerald-500 cursor-pointer transition-colors">
                   <div className="flex items-center gap-3">
                     <input
@@ -235,25 +260,34 @@ export function CheckoutPage() {
           </div>
 
           {/* Resumen del pedido */}
+
           <div className="lg:sticky lg:top-8">
             <div className="bg-white rounded-xl shadow-sm p-6">
               <h3 className="text-xl font-semibold text-gray-800 mb-6 flex items-center gap-2">
                 <ShoppingCart className="w-5 h-5 text-emerald-600" />
                 Resumen del pedido
               </h3>
-              
-              {/* Producto ejemplo */}
-              <div className="flex items-center gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
-                <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <ShoppingCart className="w-8 h-8 text-gray-400" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-medium text-gray-900">Producto ejemplo</h4>
-                  <p className="text-sm text-gray-600">Cantidad: 1</p>
-                </div>
-                <span className="font-semibold text-gray-900">S/ 150.00</span>
+
+              {/* 🛍️ Productos del carrito */}
+              <div className="space-y-4 mb-6">
+                {carrito.map((item) => (
+                  <div key={item.id} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-16 h-16 rounded-lg object-cover"
+                    />
+                    <div className="flex-1">
+                      <h4 className="font-medium text-gray-900">{item.name}</h4>
+                      <p className="text-sm text-gray-600">Cantidad: {item.quantity}</p>
+                    </div>
+                    <span className="font-semibold text-gray-900">
+                      S/ {(item.price * item.quantity).toFixed(2)}
+                    </span>
+                  </div>
+                ))}
               </div>
-              
+
               {/* Código de descuento */}
               <div className="mb-6">
                 <div className="flex gap-2">
@@ -267,39 +301,38 @@ export function CheckoutPage() {
                   </button>
                 </div>
               </div>
-              
+
               {/* Desglose de precios */}
               <div className="space-y-3 pb-4 border-b border-gray-200">
                 <div className="flex justify-between text-gray-700">
                   <span>Subtotal</span>
-                  <span>S/ 150.00</span>
+                  <span>S/ {carrito.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-gray-700">
                   <span>Envío</span>
                   <span>{form.metodoEnvio === 'express' ? 'S/ 15.00' : 'Gratis'}</span>
                 </div>
               </div>
-              
+
               <div className="flex justify-between items-center pt-4 mb-6">
                 <span className="text-xl font-semibold text-gray-900">Total</span>
                 <span className="text-xl font-bold text-emerald-600">
                   S/ {calculateTotal().toFixed(2)}
                 </span>
               </div>
-              
+
               {/* Botón de compra */}
               <button className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all transform hover:scale-105 active:scale-95 shadow-lg">
                 Confirmar compra
               </button>
-              
-              {/* Información de seguridad */}
+
               <div className="mt-4 flex items-center justify-center gap-2 text-sm text-gray-600">
                 <Lock className="w-4 h-4" />
                 <span>Pago 100% seguro y encriptado</span>
               </div>
             </div>
-            
-            {/* Beneficios adicionales */}
+
+            {/* Beneficios */}
             <div className="bg-emerald-50 rounded-xl p-6 mt-6">
               <h4 className="font-semibold text-emerald-800 mb-3">Beneficios de tu compra</h4>
               <div className="space-y-2 text-sm text-emerald-700">
