@@ -173,7 +173,7 @@ export function Footer() {
                   &copy; 2025 EcoMarket Perú. Todos los derechos reservados.
                 </p>
                 <p className="text-gray-500 text-xs mt-1 flex items-center justify-center md:justify-start">
-                  Desarrollado con <Heart className="w-3 h-3 mx-1 text-red-500" /> y <Leaf className="w-3 h-3 mx-1 text-green-500" />
+                  Desarrollado por Robert Yali, Efrain Hinostroza y Carlos Vega.
                 </p>
               </div>
               
