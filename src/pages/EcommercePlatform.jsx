@@ -562,9 +562,12 @@ export function EcommercePlatform() {
 
               {/* Botones de acción */}
               <div className="space-y-3">
-                <button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-3 rounded-xl font-bold text-base transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl">
+                <a
+                  href="/checkout"
+                  className="block w-full bg-emerald-500 hover:bg-emerald-600 text-white py-3 rounded-xl font-bold text-base transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl text-center"
+                >
                   Proceder al Pago
-                </button>
+                </a>
 
                 <button
                   onClick={clearCart}
