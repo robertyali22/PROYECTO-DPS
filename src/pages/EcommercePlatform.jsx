@@ -1187,6 +1187,7 @@ export function EcommercePlatform() {
 
       {/* ==================== FOOTER ==================== */}
       <Footer />
+      <script src="//code.tidio.co/39rfw0jsjsk5ydpdqlbfnnhkuoegefrv.js" async></script>
     </div>
   );
 }
