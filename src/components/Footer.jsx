@@ -193,16 +193,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Botón scroll to top */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 hover:scale-110 z-10"
-          aria-label="Volver arriba"
-        >
-          <ArrowUp className="w-6 h-6 text-white" />
-        </button>
-      )}
+     
     </footer>
   );
 }
